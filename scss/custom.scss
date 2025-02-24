@@ -1,0 +1,74 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+$theme-color: antiquewhite;
+$text-hover-color: Chartreuse;
+$page-text-hover-color: gold;
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    color: $theme-color;
+}
+.navbar {
+    opacity: 0.85;
+}
+.carousel img {
+    width: 640px;
+    height: 400px;
+    width: 100%;
+    border-style: groove;
+    border-width: 1px;
+    border-radius: 10px;
+}
+footer {
+    border-top: 1px solid;
+    position: fixed;
+    bottom: 0;
+    width: 95%;
+}
+.footer-icon {
+    width: 30;
+    height: 30;
+}
+.category {
+    margin: 5px;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: $theme-color;
+    color: black;
+}
+.category:hover {
+    cursor: pointer;
+    background-color: black;
+    opacity: 50%;
+    color: $theme-color;
+}
+.list-box {
+    height: 39em;
+    overflow: auto;
+}
+.list-cover {
+    border-radius: 4px;
+    width: 64px;
+    height: 48px;
+    margin: 2px;
+    margin-right: 10px;
+}
+.list-text:hover {
+    color: $text-hover-color;
+    cursor: pointer;
+}
+.page-container {
+    display: table;
+    margin: auto;
+}
+.page:hover {
+    color: $page-text-hover-color;
+    cursor: pointer;
+}
+#left-header {
+    text-align: center;
+}
+#left-header:hover {
+    color: $text-hover-color;
+    cursor: pointer;
+}
