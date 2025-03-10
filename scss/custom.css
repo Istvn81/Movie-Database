@@ -12045,4 +12045,10 @@ footer {
 #left-header:hover {
   color: Chartreuse;
   cursor: pointer;
+}
+
+.movie-data-image {
+  white-space: pre-wrap;
+  width: 300px;
+  height: 250px;
 }/*# sourceMappingURL=custom.css.map */

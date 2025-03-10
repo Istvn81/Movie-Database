@@ -15,8 +15,9 @@ switch ($action) {
     case "list_category":
         list_Category($param, $conn);
         break;
-    case "proba":
-        proba($param);
+    case "movie_data":
+        $param = substr($param, 2);
+        setMovieData($param, $conn);
         break;
 }
 // film adatok feltöltése a megjelenített borítóképnek megfelelően.
@@ -59,7 +60,7 @@ function changeMovie($param, $index, $conn) {
     echo json_encode($data);
     exit();
 }
-// Az index oldalon kiválasztott film kategória értékének eltárolása.
+// Az index oldalon kiválasztott film kategória szerint a filmek killistázása.
 function list_Category($parameter, $conn) {
     $min_rows = ($parameter[0] > 1) ? $parameter[0] * 50 - 50 + 1 : $parameter[0];
     $max_rows = $parameter[0] * 50;
@@ -71,7 +72,7 @@ function list_Category($parameter, $conn) {
         while (($row = $result->fetch_assoc()) && $row_index <= $max_rows) {
             if ($row_index >= $min_rows) {
                 $img_path = (is_null($row["cover"])) ? "pictures/icons/icons8-movie-94.png" : "pictures/movie.posters/" . $row["cover"];
-                echo "<img src='" . $img_path . "' class='list-cover'><span class='list-text' id='" . $row["id"] . "'>" . $row["name"] . "</span><br>";
+                echo "<img src='" . $img_path . "' class='list-cover'><span class='list-text' id='" . "id" . $row["id"] . "'>" . $row["name"] . "</span><br>";
             }
             $row_index ++;
         }
@@ -88,5 +89,21 @@ function list_Category($parameter, $conn) {
     }
     echo "</div>";
 }
-function proba($param) {}
+// A kiválaszott film adatainak eltárolása a Movie osztály egy példányában.
+function setMovieData($id, $conn) {
+    $_SESSION["selected_movie"] = new Movie();
+    $sql = "SELECT * FROM movies WHERE id=$id";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            ($_SESSION["selected_movie"])->set_name($row["name"]);
+            ($_SESSION["selected_movie"])->set_relase($row["relase"]);
+            ($_SESSION["selected_movie"])->set_actors($row["actors"]);
+            ($_SESSION["selected_movie"])->set_category($row["category"]);
+            ($_SESSION["selected_movie"])->set_description($row["description"]);
+            ($_SESSION["selected_movie"])->set_cover_path($row["cover"]);
+            echo $id;
+        }
+    }
+}
 ?>
